@@ -18,7 +18,11 @@ const buttonVariants = cva(
           'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
         link: 'text-primary underline-offset-4 hover:underline',
         primary:
-          'border border-blue-400/90  bg-linear-to-b from-blue-400 to-blue-700 text-white shadow shadow-xs ring inset-shadow-sm shadow-blue-400/20 ring-blue-300/10 inset-shadow-blue-600/80',
+          'border border-blue-400/90 bg-linear-to-b from-blue-400 to-blue-700 text-white shadow shadow-xs ring inset-shadow-sm shadow-blue-400/20 ring-blue-300/10 inset-shadow-blue-600/80',
+        // Same skeuomorphic recipe as `primary` (top-lit gradient, hairline
+        // border, inner highlight, soft drop), in neutral ink. Inverts in dark.
+        neutral:
+          'border border-neutral-700 bg-linear-to-b from-neutral-700 to-neutral-900 text-white shadow-xs ring inset-shadow-sm shadow-neutral-900/20 ring-neutral-900/10 inset-shadow-white/25 transition-all ease-out hover:from-neutral-600 hover:to-neutral-900 dark:border-white/80 dark:from-white dark:to-neutral-400 dark:text-neutral-900 dark:shadow-black/40 dark:ring-white/10 dark:inset-shadow-white dark:hover:from-neutral-200 dark:hover:to-neutral-400',
       },
       size: {
         default:

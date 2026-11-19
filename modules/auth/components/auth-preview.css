@@ -1,0 +1,180 @@
+/* All rules belong to the auth preview stage. */
+.ap {
+  & .ss-stage {
+    --ss-accent: oklch(0.546 0.245 262.881);
+    --ss-accent-soft: oklch(0.546 0.245 262.881 / 0.12);
+    --ss-font: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    --ss-radius-md: 7px;
+    --ss-radius-lg: 10px;
+    --gutter: 40px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--ss-well);
+    font: 12px/1.4 var(--ss-font);
+    color: var(--ss-text-strong);
+  }
+
+  /* The hero: inset a gutter plus half the run card's width from the left,
+     so the card straddles its edge; off the right and bottom. */
+  & .ap-window {
+    position: absolute;
+    left: 130px;
+    top: var(--gutter);
+    width: 520px;
+    height: 640px;
+    box-shadow: var(--ss-shadow-hero);
+  }
+
+  & .ap-canvas {
+    position: relative;
+    background-color: var(--ss-canvas);
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--ss-line) 1px,
+      transparent 0
+    );
+    background-size: 16px 16px;
+  }
+
+  /* Nodes share one center line, so the edges between them run straight. */
+  & .ap-node {
+    position: absolute;
+    left: 270px;
+    translate: -50% 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: var(--ss-radius-lg);
+    background: var(--ss-surface);
+    box-shadow: var(--ss-shadow-card);
+  }
+  & .ap-node:nth-child(1) {
+    top: 28px;
+  }
+  & .ap-node:nth-child(3) {
+    top: 286px;
+  }
+
+  & .ap-node--focus {
+    top: 122px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    box-shadow:
+      0 0 0 1px var(--ss-accent),
+      var(--ss-shadow-satellite);
+  }
+
+  & .ap-node__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  & .ap-node__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    color: var(--ss-icon);
+  }
+  & .ap-node__icon > svg {
+    position: relative;
+  }
+  & .ap-node__tile {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--ss-radius-md);
+    background: var(--ss-canvas);
+    box-shadow: inset 0 0 0 1px var(--ss-line-faint);
+  }
+  & .ap-node__icon[data-tone='accent'] {
+    color: var(--ss-accent);
+  }
+  & .ap-node__icon[data-tone='accent'] .ap-node__tile {
+    background: var(--ss-accent-soft);
+    box-shadow: none;
+  }
+
+  & .ap-node__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  & .ap-node__title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  & .ap-node__meta {
+    font-size: 12px;
+    line-height: 1.3;
+    color: var(--ss-text);
+  }
+
+  & .ap-node__body {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 12px;
+    border-radius: var(--ss-radius-md);
+    background: var(--ss-canvas);
+  }
+
+  /* The satellite: a run card over the canvas's empty left margin. */
+  & .ap-run {
+    position: absolute;
+    left: var(--gutter);
+    top: 290px;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    border-radius: var(--ss-radius-lg);
+    background: var(--ss-surface);
+    box-shadow: var(--ss-shadow-satellite);
+  }
+
+  & .ap-run__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ss-line-faint);
+  }
+  & .ap-run__head .ss-check {
+    color: var(--ss-success);
+  }
+
+  & .ap-run__title {
+    font-weight: 600;
+  }
+
+  & .ap-run__time {
+    margin-left: auto;
+    color: var(--ss-text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  & .ap-run__row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  & .ap-run__icon {
+    flex: none;
+    color: var(--ss-icon-faint);
+  }
+
+  & .ap-run__ms {
+    margin-left: auto;
+  }
+}

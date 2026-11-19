@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Cute ginger cat mascot holding a floating blue AI building block">
+<defs>
+ <linearGradient id="fur" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#CB875D"/><stop offset="1" stop-color="#A86146"/></linearGradient>
+ <linearGradient id="belly" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFE4C7"/><stop offset="1" stop-color="#F3C7A4"/></linearGradient>
+ <linearGradient id="face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFE9D2"/><stop offset="1" stop-color="#FAD1AF"/></linearGradient>
+ <linearGradient id="cubeTop" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9CE4FF"/><stop offset="1" stop-color="#69C6FF"/></linearGradient>
+ <linearGradient id="cubeL" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#60B6FF"/><stop offset="1" stop-color="#3989F8"/></linearGradient>
+ <linearGradient id="cubeR" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7AABFF"/><stop offset="1" stop-color="#5794FA"/></linearGradient>
+ <filter id="softShadow" x="-30%" y="-50%" width="160%" height="220%"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<!-- Background: soft blue avatar square like the supplied playful character reference -->
+<rect width="1024" height="1024" fill="#E0EAFC"/>
+<!-- whimsical points and nodes -->
+<circle cx="182" cy="480" r="15" fill="#A7AFFC"/>
+<circle cx="811" cy="427" r="14" fill="#95BFFF"/>
+<circle cx="844" cy="575" r="23" fill="#A58AFF"/>
+<circle cx="194" cy="675" r="9" fill="#95C4FF"/>
+<circle cx="802" cy="710" r="10" fill="#95C4FF"/>
+<path d="M789 472c43 15 54 49 36 76" fill="none" stroke="#AED1FF" stroke-width="9" stroke-linecap="round"/>
+<path d="M196 529c-18 33-11 65 6 76" fill="none" stroke="#AFD1FF" stroke-width="8" stroke-linecap="round"/>
+<!-- little building/AI glimmers -->
+<path d="M775 255v-20m0 76v-20m-38-18h20m36 0h20" stroke="#75A9FF" stroke-width="8" stroke-linecap="round"/>
+<path d="M208 283v-10m0 45v-10m-22-12h11m23 0h10" stroke="#A7B5FF" stroke-width="6" stroke-linecap="round"/>
+<!-- ground and shadow -->
+<ellipse cx="511" cy="863" rx="326" ry="45" fill="#A8C9FF"/>
+<ellipse cx="518" cy="847" rx="245" ry="31" fill="#789BD7" opacity=".19" filter="url(#softShadow)"/>
+<!-- curled tail behind body -->
+<path d="M325 777C232 797 157 744 157 663c0-40 18-70 50-78 23-6 44 10 45 33 0 19-13 42-7 63 9 28 41 36 84 26Z" fill="#8B4C3D"/>
+<path d="M215 599c-26 16-24 64-11 90 20 42 69 61 114 49" fill="none" stroke="#A96348" stroke-width="24" stroke-linecap="round"/>
+<!-- sitting body -->
+<path d="M326 558c-40 35-63 101-63 163 0 93 82 144 244 147 159 3 260-43 260-145 0-79-27-143-82-180Z" fill="url(#fur)"/>
+<path d="M428 565c-54 50-65 130-50 202 11 62 64 92 151 93 116 0 172-50 174-145 1-64-22-118-62-159Z" fill="url(#belly)"/>
+<path d="M428 580c-31 38-44 73-40 113" fill="none" stroke="#F7D4B5" stroke-width="21" stroke-linecap="round" opacity=".9"/>
+<!-- pointy cat ears: unmistakable triangular silhouette -->
+<path d="M296 296c-17-59-31-120-28-172 1-18 17-25 32-14 44 26 88 61 116 94Z" fill="#96523F"/>
+<path d="M304 254c-12-35-21-73-23-107 25 17 58 43 85 67Z" fill="#E99C96"/>
+<path d="M630 208c31-37 70-74 115-100 17-10 31-2 32 17 3 49-9 112-29 168Z" fill="#96523F"/>
+<path d="M676 218c28-26 57-50 81-68-3 37-10 73-22 105Z" fill="#E99C96"/>
+<!-- head big round shape -->
+<path d="M287 347c-4-104 93-184 214-191 125-11 235 46 254 145 18 91-43 181-139 222-67 29-177 29-244-10-55-31-83-87-85-166Z" fill="url(#fur)"/>
+<!-- warm cheek fur and muzzle -->
+<path d="M306 388c24-28 72-27 102-12 31 16 51 41 95 36 41-6 53-37 92-48 48-14 115 0 144 28-12 64-65 116-124 135-65 24-163 22-225-10-44-24-73-66-84-129Z" fill="url(#face)"/>
+<!-- forehead tuft and stripes -->
+<path d="M450 218c22 10 37 24 42 44m22-56c11 13 19 28 19 44m23-31c-7 8-13 19-15 29" fill="none" stroke="#A65D42" stroke-width="11" stroke-linecap="round"/>
+<!-- cheek blush -->
+<ellipse cx="365" cy="426" rx="27" ry="13" fill="#EDAFA4" opacity=".52"/>
+<ellipse cx="670" cy="418" rx="27" ry="13" fill="#EDAFA4" opacity=".52"/>
+<!-- friendly eyes -->
+<ellipse cx="415" cy="348" rx="30" ry="39" fill="#442B2A" transform="rotate(-7 415 348)"/>
+<ellipse cx="619" cy="342" rx="30" ry="39" fill="#442B2A" transform="rotate(7 619 342)"/>
+<ellipse cx="405" cy="332" rx="11" ry="14" fill="#FFFFFF"/>
+<circle cx="427" cy="360" r="5.5" fill="#FFFFFF" opacity=".8"/>
+<ellipse cx="609" cy="326" rx="11" ry="14" fill="#FFFFFF"/>
+<circle cx="628" cy="353" r="5.5" fill="#FFFFFF" opacity=".8"/>
+<!-- brows -->
+<path d="M385 295c10-13 23-18 38-17m172-2c16-7 30-4 42 9" fill="none" stroke="#8F4D3D" stroke-width="9" stroke-linecap="round"/>
+<!-- muzzle lobes -->
+<ellipse cx="477" cy="439" rx="47" ry="33" fill="#FFEAD5"/>
+<ellipse cx="558" cy="436" rx="47" ry="33" fill="#FFEAD5"/>
+<!-- nose and smile -->
+<path d="M499 415q18-15 35-1 6 6-2 15l-11 9q-6 4-13-2l-11-10q-6-6 2-11Z" fill="#885044"/>
+<path d="M520 439v15m-1 0c-17 20-38 18-51 3m52-3c17 18 39 15 50-4" stroke="#6F4237" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path d="M500 469q18 20 36 0c-2 23-33 29-36 0Z" fill="#F48789"/>
+<!-- whiskers -->
+<g stroke="#865448" stroke-width="5" fill="none" stroke-linecap="round">
+ <path d="M367 414c-37-12-73-9-104 4"/><path d="M368 435c-47 0-77 14-99 34"/><path d="M377 450c-32 13-51 35-61 55"/>
+ <path d="M660 407c39-14 79-14 110-6"/><path d="M661 432c45-1 78 9 101 27"/><path d="M656 448c36 15 56 33 65 50"/>
+</g>
+<!-- subtle collar: helpful bot vibe -->
+<path d="M390 529c60 39 175 51 256 3" fill="none" stroke="#F1E1CC" stroke-width="15" stroke-linecap="round"/>
+<circle cx="511" cy="557" r="25" fill="#FFFFFF"/>
+<circle cx="511" cy="557" r="19" fill="#67D6C8"/>
+<circle cx="504" cy="548" r="5" fill="#C9FFF5"/>
+<!-- energetic orbit behind cube -->
+<path d="M301 674c75 79 343 116 441-20" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" fill="none" opacity=".87"/>
+<path d="M712 650c29-24 45-52 40-70" stroke="#9DCFFF" stroke-width="8" stroke-linecap="round" fill="none"/>
+<!-- isometric constructible cube; central product metaphor -->
+<g stroke="#ECF7FF" stroke-width="10" stroke-linejoin="round">
+ <path d="M516 537 625 594 516 653 406 594Z" fill="url(#cubeTop)"/>
+ <path d="M406 594 516 653v117L406 708Z" fill="url(#cubeL)"/>
+ <path d="M516 653 625 594v114L516 770Z" fill="url(#cubeR)"/>
+</g>
+<path d="M516 552 604 596 516 640 428 595Z" fill="#FFFFFF" opacity=".11"/>
+<!-- paws gently gripping the cube -->
+<path d="M408 632c-35-15-65-5-72 23-9 31 13 62 52 75 13 5 23 0 31-16 12-26 9-59-11-82Z" fill="#A7654A"/>
+<path d="M622 632c35-17 65-7 74 20 10 31-12 64-49 77-14 6-25 0-33-17-12-25-10-59 8-80Z" fill="#A7654A"/>
+<!-- paw little toe grooves -->
+<g stroke="#814636" stroke-width="5" stroke-linecap="round" fill="none"><path d="M352 660q13-13 27-3m-19 18q14-12 28-2"/><path d="M676 657q-15-12-29-2m20 19q-13-11-27-1"/></g>
+<!-- hind feet in front -->
+<path d="M305 752c-33 10-53 45-51 82 2 32 30 46 72 47 48 2 90-17 90-48 0-38-35-92-111-81Z" fill="#B26F51"/>
+<path d="M719 752c34 9 54 43 53 81-1 33-29 48-72 48-50 1-91-18-91-49 0-39 36-92 110-80Z" fill="#B26F51"/>
+<ellipse cx="346" cy="826" rx="29" ry="33" fill="#814B3D" transform="rotate(-15 346 826)"/>
+<ellipse cx="675" cy="826" rx="29" ry="33" fill="#814B3D" transform="rotate(15 675 826)"/>
+<g fill="#814B3D"><ellipse cx="290" cy="796" rx="11" ry="16" transform="rotate(-22 290 796)"/><ellipse cx="317" cy="778" rx="10" ry="15" transform="rotate(-10 317 778)"/><ellipse cx="348" cy="780" rx="10" ry="15" transform="rotate(10 348 780)"/><ellipse cx="735" cy="796" rx="11" ry="16" transform="rotate(22 735 796)"/><ellipse cx="707" cy="779" rx="10" ry="15" transform="rotate(10 707 779)"/><ellipse cx="676" cy="781" rx="10" ry="15" transform="rotate(-10 676 781)"/></g>
+</svg>
