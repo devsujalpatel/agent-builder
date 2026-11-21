@@ -28,7 +28,7 @@ function UserAvatar({
   size,
 }: {
   user: UserMenuUser;
-  size?: 'default' | 'lg';
+  size?: 'default' | 'lg' | 'sm';
 }) {
   return (
     <Avatar size={size}>
@@ -50,12 +50,12 @@ export function UserMenuDropdown({ user }: { user: UserMenuUser }) {
         // Press feedback (Emil): transform-only scale, fast custom ease-out.
         className="focus-visible:ring-ring/50 data-popup-open:ring-ring/30 rounded-full transition-[scale] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] outline-none focus-visible:ring-3 active:scale-[0.96] data-popup-open:ring-3"
       >
-        <UserAvatar user={user} />
+        <UserAvatar user={user} size="sm" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" sideOffset={8} className="w-64">
         <div className="flex items-center gap-3 px-2 py-2">
-          <UserAvatar user={user} size="lg" />
+          <UserAvatar user={user} size="sm" />
           <div className="flex min-w-0 flex-col gap-0.5">
             <span className="text-foreground truncate text-sm font-medium">
               {user.name}

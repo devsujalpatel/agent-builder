@@ -1,0 +1,93 @@
+import {
+  Add01Icon,
+  AiBrain01Icon,
+  AiSparklesIcon,
+  Airplane01Icon,
+  BotIcon,
+  Calculator01Icon,
+  FileDiffIcon,
+  Flag01Icon,
+  Folder01Icon,
+  GitPullRequestIcon,
+  GlobeIcon,
+  PencilEdit01Icon,
+  PlayIcon,
+  SearchIcon,
+  SourceCodeIcon,
+  SunCloud01Icon,
+} from '@hugeicons/core-free-icons';
+
+export const iconMap = {
+  bot: BotIcon,
+  model: AiSparklesIcon,
+  weather: SunCloud01Icon,
+  'web-research': SearchIcon,
+  travel: Airplane01Icon,
+  writing: PencilEdit01Icon,
+  coding: SourceCodeIcon,
+  'pr-review': GitPullRequestIcon,
+  blank: Add01Icon,
+  calculator: Calculator01Icon,
+  web_search: SearchIcon,
+  read_webpage: GlobeIcon,
+  github_read_file: Folder01Icon,
+  github_search_code: SourceCodeIcon,
+  github_get_pr: GitPullRequestIcon,
+  github_get_diff: FileDiffIcon,
+  memory: AiBrain01Icon,
+  custom: Add01Icon,
+  play: PlayIcon,
+  flag: Flag01Icon,
+};
+
+export const iconColors: Record<keyof typeof iconMap, string> = {
+  bot: 'text-cyan-800 dark:text-cyan-200',
+  model: 'text-violet-800 dark:text-violet-200',
+  weather: 'text-sky-800 dark:text-sky-200',
+  'web-research': 'text-yellow-800 dark:text-yellow-200',
+  travel: 'text-orange-800 dark:text-orange-200',
+  writing: 'text-rose-800 dark:text-rose-200',
+  coding: 'text-emerald-800 dark:text-emerald-200',
+  'pr-review': 'text-fuchsia-800 dark:text-fuchsia-200',
+  blank: 'text-slate-800 dark:text-slate-200',
+  calculator: 'text-amber-800 dark:text-amber-200',
+  web_search: 'text-yellow-800 dark:text-yellow-200',
+  read_webpage: 'text-blue-800 dark:text-blue-200',
+  github_read_file: 'text-orange-800 dark:text-orange-200',
+  github_search_code: 'text-emerald-800 dark:text-emerald-200',
+  github_get_pr: 'text-violet-800 dark:text-violet-200',
+  github_get_diff: 'text-rose-800 dark:text-rose-200',
+  memory: 'text-cyan-800 dark:text-cyan-200',
+  custom: 'text-lime-800 dark:text-lime-200',
+  play: 'text-emerald-800 dark:text-emerald-200',
+  flag: 'text-rose-800 dark:text-rose-200',
+};
+
+export const iconBgColors: Record<keyof typeof iconMap, string> = {
+  bot: 'bg-cyan-500/15',
+  model: 'bg-violet-500/15',
+  weather: 'bg-sky-500/15',
+  'web-research': 'bg-yellow-500/15',
+  travel: 'bg-orange-500/15',
+  writing: 'bg-rose-500/15',
+  coding: 'bg-emerald-500/15',
+  'pr-review': 'bg-fuchsia-500/15',
+  blank: 'bg-slate-500/15',
+  calculator: 'bg-amber-500/15',
+  web_search: 'bg-yellow-500/15',
+  read_webpage: 'bg-blue-500/15',
+  github_read_file: 'bg-orange-500/15',
+  github_search_code: 'bg-emerald-500/15',
+  github_get_pr: 'bg-violet-500/15',
+  github_get_diff: 'bg-rose-500/15',
+  memory: 'bg-cyan-500/15',
+  custom: 'bg-lime-500/15',
+  play: 'bg-emerald-500/15',
+  flag: 'bg-rose-500/15',
+};
+
+export type IconName = keyof typeof iconMap;
+
+export function isIconName(name: string): name is IconName {
+  return Object.prototype.hasOwnProperty.call(iconMap, name);
+}

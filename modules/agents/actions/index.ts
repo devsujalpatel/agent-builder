@@ -1,6 +1,11 @@
 'use server';
 import { prisma } from '@/lib/db';
 import { requireAuth } from '@/modules/auth/actions';
+import {
+  saveAgentInputSchema,
+  type SaveAgentInput,
+} from '@/modules/builder/lib/schema';
+import { loadBuilderDefinition } from '@/modules/workflows/lib/migrate-v1';
 import { defaultDefinition } from '../lib/definition';
 import { getTemplate } from '../lib/templates';
 
@@ -32,7 +37,7 @@ export async function createBlankAgent() {
     data: {
       userId: user.user.id,
       name: 'Untitled Agent',
-      draftDefinition: defaultDefinition() as any,
+      draftDefinition: defaultDefinition(),
     },
   });
 }
@@ -54,7 +59,7 @@ export async function createFromTemplate(templateId: string) {
       icon: template.icon,
       welcomeMessage: template.welcomeMessage,
       starterPrompts: template.starterPrompts,
-      draftDefinition: defaultDefinition() as any,
+      draftDefinition: template.definition,
     },
   });
 }
@@ -83,18 +88,40 @@ export async function updateAgent(
   if (!agent) {
     throw new Error('Agent not found');
   }
-  const draftDefinition = agent.draftDefinition as ReturnType<
-    typeof defaultDefinition
-  >;
+  const draftDefinition =
+    data.instructions === undefined
+      ? undefined
+      : loadBuilderDefinition(agent.draftDefinition);
+
+  if (draftDefinition && data.instructions !== undefined) {
+    const instructions = data.instructions;
+    draftDefinition.nodes = draftDefinition.nodes.map((node) =>
+      node.type === 'agent'
+        ? { ...node, config: { ...node.config, instructions } }
+        : node,
+    );
+  }
 
   return prisma.agent.update({
-    where: { id: agentId },
+    where: { id: agentId, userId: user.user.id },
     data: {
-      name: data.name ?? agent.name,
-      description: data.description ?? agent.description,
-      draftDefinition: data.instructions
-        ? { ...draftDefinition, instructions: data.instructions }
-        : (draftDefinition as any),
+      name: data.name,
+      description: data.description,
+      draftDefinition,
     },
+  });
+}
+
+export async function saveAgent(agentId: string, data: SaveAgentInput) {
+  const user = await requireAuth();
+  const parsed = saveAgentInputSchema.safeParse(data);
+
+  if (!parsed.success) {
+    throw new Error('Enter a name and a model ID before saving the agent.');
+  }
+
+  return prisma.agent.update({
+    where: { id: agentId, userId: user.user.id },
+    data: parsed.data,
   });
 }

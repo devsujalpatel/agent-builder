@@ -1,11 +1,6 @@
-export type AgentDefinition = {
-  schemaVersion: 1;
-  instructions: string;
-  model: { provider: 'inception'; modelId: string };
-  tools: { toolId: string; config: Record<string, unknown> }[];
-  memory: { enabled: boolean };
-  limits: { maxToolCalls: number; timeoutMs: number };
-};
+import type { LegacyDefinition } from '@/modules/builder/lib/schema';
+
+export type AgentDefinition = LegacyDefinition;
 
 export function defaultDefinition(): AgentDefinition {
   return {

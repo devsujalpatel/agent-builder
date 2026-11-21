@@ -8,8 +8,10 @@ import {
   deleteAgent,
   fetchAgent,
   listAgents,
+  saveAgent,
   updateAgent,
 } from '@/modules/agents/actions';
+import type { SaveAgentInput } from '@/modules/builder/lib/schema';
 import { agentKeys } from '@/modules/agents/lib/query-keys';
 
 export function useAgents() {
@@ -77,6 +79,18 @@ export function useUpdateAgent(agentId: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: agentKeys.detail(agentId) });
       queryClient.invalidateQueries({ queryKey: agentKeys.list() });
+    },
+  });
+}
+
+export function useSaveAgent(agentId: string) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: SaveAgentInput) => saveAgent(agentId, data),
+    onSuccess: (agent) => {
+      queryClient.setQueryData(agentKeys.detail(agentId), agent);
+      void queryClient.invalidateQueries({ queryKey: agentKeys.list() });
     },
   });
 }

@@ -23,9 +23,9 @@ export function UserButton({
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label="Account menu"
-        className="focus-visible:ring-ring/50 flex min-w-0 items-center gap-2 rounded-full outline-none focus-visible:ring-[3px]"
+        className="focus-visible:ring-ring/50 flex min-w-0 items-center gap-1.5 rounded-full outline-none focus-visible:ring-[3px]"
       >
-        <Avatar>
+        <Avatar size="sm">
           {user.image && (
             <AvatarImage src={user.image} alt={user.name ?? 'User'} />
           )}
