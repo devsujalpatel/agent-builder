@@ -39,12 +39,12 @@ export function useCreateBlankAgent() {
   });
 }
 
-export function useCreateFromTemplate(templateId: string) {
+export function useCreateFromTemplate() {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   return useMutation({
-    mutationFn: () => createFromTemplate(templateId),
+    mutationFn: createFromTemplate,
     onSuccess: (agent) => {
       queryClient.invalidateQueries({ queryKey: agentKeys.list() });
       router.push(`/agents/${agent.id}/builder`);

@@ -18,7 +18,7 @@ const buttonVariants = cva(
           'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
         link: 'text-primary underline-offset-4 hover:underline',
         primary:
-          'border border-blue-400/90 bg-linear-to-b from-blue-400 to-blue-700 text-white shadow shadow-xs ring inset-shadow-sm shadow-blue-400/20 ring-blue-300/10 inset-shadow-blue-600/80',
+          'border-blue-600 bg-linear-to-b from-blue-600 to-blue-700 text-white shadow-xs ring inset-shadow-sm shadow-blue-600/20 ring-blue-300/10 inset-shadow-white/20 hover:from-blue-700 hover:to-blue-800 focus-visible:ring-blue-600/60 dark:focus-visible:ring-blue-300/70',
         // Same skeuomorphic recipe as `primary` (top-lit gradient, hairline
         // border, inner highlight, soft drop), in neutral ink. Inverts in dark.
         neutral:
