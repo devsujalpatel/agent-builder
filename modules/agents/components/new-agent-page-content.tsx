@@ -29,9 +29,9 @@ export function NewAgentPageContent() {
   const isCreating = isCreatingBlank || isCreatingTemplate;
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-7 md:py-10 lg:px-10">
-      <header className="mb-7 space-y-2">
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-8 md:py-12 lg:px-12">
+      <header className="mb-7 space-y-2 border-b pb-6">
+        <h1 className="text-[2rem] leading-tight font-semibold tracking-[-0.045em] sm:text-[2.75rem]">
           Create an agent
         </h1>
         <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
@@ -46,9 +46,9 @@ export function NewAgentPageContent() {
         </Alert>
       )}
 
-      <Card className="border-border grid gap-0 overflow-hidden rounded-2xl border py-0 shadow-xs ring-0 sm:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+      <Card className="workspace-surface grid gap-0 overflow-hidden rounded-3xl py-0 ring-0 sm:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
         <div className="flex flex-col items-start p-5 sm:p-7">
-          <span className="mb-4 flex size-10 items-center justify-center rounded-xl bg-blue-100 text-blue-800 dark:bg-blue-400/15 dark:text-blue-200">
+          <span className="bg-muted text-workspace-accent-ink mb-4 flex size-10 items-center justify-center rounded-2xl">
             <HugeiconsIcon
               icon={File01Icon}
               className="size-5"
@@ -63,9 +63,9 @@ export function NewAgentPageContent() {
             respond.
           </p>
           <Button
-            variant="primary"
+            variant="neutral"
             size="lg"
-            className="mt-5 motion-reduce:transition-none"
+            className="mt-5 rounded-full px-4 motion-reduce:transition-none"
             onClick={() => {
               createTemplate.reset();
               createBlank.mutate();
@@ -131,13 +131,13 @@ function BlankAgentIllustration() {
   return (
     <div
       aria-hidden="true"
-      className="relative hidden min-h-52 items-center justify-center overflow-hidden border-l border-dashed bg-blue-50/65 text-blue-700 sm:flex dark:bg-blue-950/20 dark:text-blue-300"
+      className="bg-muted/65 text-workspace-accent-ink relative hidden min-h-52 items-center justify-center overflow-hidden border-l sm:flex"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle,currentColor_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_80%)] bg-size-[14px_14px] opacity-20" />
-      <div className="relative rotate-6 rounded-2xl border border-blue-200/70 bg-blue-100/70 shadow-sm dark:border-blue-300/15 dark:bg-blue-400/10">
-        <div className="bg-card -translate-x-2 -translate-y-2 -rotate-12 rounded-2xl border border-blue-200/70 px-5 py-4 shadow-md shadow-blue-950/10 dark:border-blue-300/20">
+      <div className="border-border bg-muted relative rotate-6 rounded-2xl border shadow-sm">
+        <div className="bg-card border-border -translate-x-2 -translate-y-2 -rotate-12 rounded-2xl border px-5 py-4 shadow-md">
           <div className="mb-4 flex items-center gap-3">
-            <span className="grid size-9 place-items-center rounded-lg bg-blue-100 dark:bg-blue-400/15">
+            <span className="bg-muted grid size-9 place-items-center rounded-xl">
               <HugeiconsIcon icon={BotIcon} className="size-5" />
             </span>
             <span className="bg-foreground/20 h-2 w-16 rounded-full" />

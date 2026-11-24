@@ -27,11 +27,11 @@ export function SignInForm({
   callbackURL?: string;
 }) {
   return (
-    <Card className="w-full max-w-sm gap-6 py-6 shadow-[0_1px_2px_rgb(0_0_0/0.04),0_8px_24px_-12px_rgb(0_0_0/0.12)] [--card-spacing:--spacing(6)] dark:shadow-none">
+    <Card className="workspace-surface w-full max-w-sm gap-6 rounded-3xl py-7 ring-0 [--card-spacing:--spacing(6)]">
       <CardHeader className={enter}>
         {/* Not a link: home redirects guests straight back here. */}
         <Logo href={null} showLabel={false} size={40} eager className="mb-3" />
-        <CardTitle className="text-lg font-semibold tracking-tight">
+        <CardTitle className="text-2xl font-semibold tracking-tight">
           Sign in to {siteConfig.name}
         </CardTitle>
         <CardDescription className="text-pretty">
@@ -45,7 +45,7 @@ export function SignInForm({
           <SubmitButton
             variant="neutral"
             size="lg"
-            className="h-10 w-full text-sm"
+            className="h-10 w-full rounded-full text-sm"
             pending={
               <>
                 <Spinner className="size-4" />
@@ -60,7 +60,7 @@ export function SignInForm({
       </CardContent>
 
       <CardFooter
-        className={`${enter} text-muted-foreground text-xs delay-[110ms]`}
+        className={`${enter} text-muted-foreground rounded-b-3xl bg-transparent text-xs delay-[110ms]`}
       >
         We only read your public profile and email address.
       </CardFooter>

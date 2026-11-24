@@ -23,8 +23,8 @@ async function AuthenticatedDashboard({ children }: DashboardLayoutProps) {
   const { user } = await requireAuth();
 
   return (
-    <div className="bg-sidebar grid flex-1 grid-cols-[minmax(0,1fr)_auto] grid-rows-[3.75rem_auto_1fr] md:grid-cols-[13rem_minmax(0,1fr)] md:grid-rows-[3.75rem_1fr]">
-      <div className="flex items-center border-b px-4 md:border-r md:px-5">
+    <div className="bg-sidebar grid flex-1 grid-cols-[minmax(0,1fr)_auto] grid-rows-[3.75rem_auto_1fr] md:grid-cols-[14rem_minmax(0,1fr)] md:grid-rows-[3.75rem_1fr]">
+      <div className="flex items-center border-b px-4 md:border-r md:px-6">
         <Logo
           href="/agents"
           size={28}
@@ -33,7 +33,7 @@ async function AuthenticatedDashboard({ children }: DashboardLayoutProps) {
           labelClassName="text-base font-semibold"
         />
       </div>
-      <header className="md:bg-background flex min-w-0 items-center justify-end gap-3 border-b pr-4 md:justify-between md:px-7">
+      <header className="bg-sidebar flex min-w-0 items-center justify-end gap-3 border-b pr-4 md:justify-between md:px-7">
         <Suspense fallback={null}>
           <DashboardBreadcrumb />
         </Suspense>
@@ -42,7 +42,7 @@ async function AuthenticatedDashboard({ children }: DashboardLayoutProps) {
           <UserButton user={user} />
         </div>
       </header>
-      <div className="col-span-2 border-b px-4 py-2 md:col-span-1 md:border-r md:border-b-0 md:px-3 md:py-6">
+      <div className="col-span-2 border-b px-4 py-2 md:col-span-1 md:border-r md:border-b-0 md:px-4 md:py-7">
         <Suspense fallback={null}>
           <DashboardNav />
         </Suspense>

@@ -38,7 +38,7 @@ export function NodeSettingsPanel() {
 
   if (selectedNode.type !== 'agent') {
     return (
-      <section className="space-y-2 border-t border-dashed pt-5">
+      <section className="space-y-2 border-t pt-5">
         <h2 className="text-sm font-semibold">{selectedNode.data.label}</h2>
         <p className="text-muted-foreground text-sm">
           {selectedNode.type === 'start'
@@ -59,7 +59,7 @@ export function NodeSettingsPanel() {
     isCustomToolConfig(selectedTool.config)
   ) {
     return (
-      <section className="space-y-4 border-t border-dashed pt-4">
+      <section className="space-y-4 border-t pt-4">
         <Button
           variant="ghost"
           size="sm"
@@ -86,7 +86,7 @@ export function NodeSettingsPanel() {
   return (
     <section
       aria-labelledby="node-settings"
-      className="space-y-4 border-t border-dashed pt-5"
+      className="space-y-4 border-t pt-5"
     >
       <h2 id="node-settings" className="text-sm font-semibold">
         Agent node
@@ -135,7 +135,7 @@ export function NodeSettingsPanel() {
                 className={cn(
                   'rounded-full font-mono motion-reduce:transition-none',
                   data.modelId === model &&
-                    'bg-blue-100 text-blue-900 hover:bg-blue-200 dark:bg-blue-400/20 dark:text-blue-200',
+                    'bg-muted text-workspace-accent-ink',
                 )}
                 aria-pressed={data.modelId === model}
                 onClick={() => updateAgentNode(id, { modelId: model })}
@@ -147,10 +147,7 @@ export function NodeSettingsPanel() {
         </Field>
       </FieldGroup>
 
-      <section
-        aria-labelledby="node-tools"
-        className="space-y-2 border-t border-dashed pt-4"
-      >
+      <section aria-labelledby="node-tools" className="space-y-2 border-t pt-4">
         <h3 id="node-tools" className="text-sm font-medium">
           Tools{' '}
           <span className="text-muted-foreground font-mono text-xs">
@@ -162,7 +159,7 @@ export function NodeSettingsPanel() {
             Open Tools to add a capability.
           </p>
         ) : (
-          <ul className="bg-card divide-y rounded-xl border shadow-xs">
+          <ul className="workspace-surface divide-y overflow-hidden rounded-2xl">
             {data.tools.map((tool, index) => {
               const label = getToolLabel(tool.toolId, tool.config);
               const icon = getToolIcon(tool.toolId, tool.config);
@@ -206,7 +203,7 @@ export function NodeSettingsPanel() {
 
       <Field
         orientation="horizontal"
-        className="items-center justify-between border-t border-dashed pt-4"
+        className="items-center justify-between border-t pt-4"
       >
         <div className="space-y-1">
           <FieldLabel htmlFor="node-memory">Memory</FieldLabel>

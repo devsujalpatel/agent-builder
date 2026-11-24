@@ -14,6 +14,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
+import { BounceSidebar } from '@/components/ui/bounce-sidebar';
 import { cn } from '@/lib/utils';
 
 const links = [
@@ -26,27 +27,35 @@ export function DashboardNav() {
   const activePath = pathname === '/agents/new' ? pathname : '/agents';
 
   return (
-    <nav aria-label="Workspace" className="flex flex-wrap gap-1 md:flex-col">
-      <p className="text-muted-foreground mb-1 hidden px-2.5 font-mono text-[11px] tracking-wide uppercase md:block">
+    <nav aria-label="Workspace">
+      <p className="text-muted-foreground mb-2 hidden px-2.5 text-xs font-medium md:block">
         Workspace
       </p>
-      {links.map(({ href, label, icon }) => (
-        <Button
-          key={href}
-          render={<Link href={href} />}
-          nativeButton={false}
-          variant="ghost"
-          aria-current={pathname === href ? 'page' : undefined}
-          className={cn(
-            'text-muted-foreground justify-start gap-2.5 px-2.5 motion-reduce:transition-none',
-            activePath === href &&
-              'border-blue-200/60 bg-blue-50 text-blue-800 hover:bg-blue-100 hover:text-blue-900 dark:border-blue-400/15 dark:bg-blue-400/10 dark:text-blue-200 dark:hover:bg-blue-400/20 dark:hover:text-blue-100',
-          )}
-        >
-          <HugeiconsIcon icon={icon} aria-hidden="true" />
-          {label}
-        </Button>
-      ))}
+      <BounceSidebar
+        items={links}
+        value={links.findIndex(({ href }) => href === activePath)}
+        currentHref={pathname}
+        dotColor="var(--workspace-accent)"
+        className="hidden md:flex [&_[data-active=true]]:font-semibold"
+      />
+      <div className="flex flex-wrap gap-1 md:hidden">
+        {links.map(({ href, label, icon }) => (
+          <Button
+            key={href}
+            render={<Link href={href} />}
+            nativeButton={false}
+            variant="ghost"
+            aria-current={pathname === href ? 'page' : undefined}
+            className={cn(
+              'text-muted-foreground justify-start gap-2.5 rounded-full px-3 motion-reduce:transition-none',
+              activePath === href && 'bg-muted text-foreground font-semibold',
+            )}
+          >
+            <HugeiconsIcon icon={icon} aria-hidden="true" />
+            {label}
+          </Button>
+        ))}
+      </div>
     </nav>
   );
 }

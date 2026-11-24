@@ -26,18 +26,16 @@ export function FlowNodeCard({
   return (
     <Card
       className={cn(
-        'w-64 gap-3 rounded-xl border px-4 py-3.5 shadow-sm ring-0',
+        'workspace-surface w-64 gap-3 rounded-2xl px-4 py-3.5 ring-0',
         (selected || isActive) &&
-          'border-blue-500 ring-2 ring-blue-500/20 dark:border-blue-400',
+          'outline-workspace-accent/80 outline-2 outline-offset-1',
       )}
     >
       <div className="flex min-w-0 items-center gap-2.5">
         <AppIcon name={icon} badge className="size-8 rounded-lg" />
         <div className="min-w-0">
-          <p className="text-muted-foreground font-mono text-[10px] tracking-wide uppercase">
-            {kind}
-          </p>
-          <p className="truncate font-medium">{label}</p>
+          <p className="text-muted-foreground text-[11px]">{kind}</p>
+          <p className="truncate font-semibold">{label}</p>
         </div>
       </div>
       {children}

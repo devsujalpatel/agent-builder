@@ -76,7 +76,7 @@ export function TemplateCard({
   const example = template.starterPrompts[0];
 
   return (
-    <Card className="border-border border shadow-xs ring-0 [--card-spacing:--spacing(5)]">
+    <Card className="workspace-surface rounded-3xl ring-0 [--card-spacing:--spacing(5)]">
       <CardHeader className="gap-1.5">
         <span
           className={cn(
@@ -93,7 +93,7 @@ export function TemplateCard({
       </CardHeader>
       {example && (
         <CardContent>
-          <div className="bg-muted/70 text-muted-foreground flex items-start gap-2 rounded-lg px-3 py-2.5 text-xs leading-relaxed">
+          <div className="bg-muted/70 text-muted-foreground flex items-start gap-2 rounded-2xl px-3 py-2.5 text-xs leading-relaxed">
             <HugeiconsIcon
               icon={Message01Icon}
               className="mt-0.5 size-3.5 shrink-0"
@@ -103,11 +103,11 @@ export function TemplateCard({
           </div>
         </CardContent>
       )}
-      <CardFooter className="mt-auto justify-end rounded-none border-dashed bg-transparent py-3">
+      <CardFooter className="mt-auto justify-end rounded-b-3xl bg-transparent py-3">
         <Button
           variant="outline"
           size="sm"
-          className="motion-reduce:transition-none"
+          className="rounded-full px-3 motion-reduce:transition-none"
           aria-label={
             isCreating
               ? `Creating ${template.name}`

@@ -82,6 +82,17 @@ function createCanvasStore(draftDefinition: unknown, canvas: unknown) {
       })),
     onConnect: (connection) =>
       set((state) => {
+        const source = state.nodes.find(
+          (node) => node.id === connection.source,
+        );
+        const target = state.nodes.find(
+          (node) => node.id === connection.target,
+        );
+        const valid =
+          (source?.type === 'start' && target?.type === 'agent') ||
+          (source?.type === 'agent' && target?.type === 'end');
+        if (!valid) return state;
+
         const edges = addEdge(connection, state.edges);
         return edges.length !== state.edges.length
           ? { edges, revision: state.revision + 1 }

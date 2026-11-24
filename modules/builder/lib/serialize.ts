@@ -30,9 +30,9 @@ type EndFlowNode = Node<{ label: string }, 'end'>;
 export type BuilderFlowNode = StartFlowNode | AgentFlowNode | EndFlowNode;
 
 const defaultPositions = {
-  start: { x: 0, y: 0 },
-  agent: { x: 0, y: 136 },
-  end: { x: 0, y: 344 },
+  start: { x: 280, y: 40 },
+  agent: { x: 280, y: 180 },
+  end: { x: 280, y: 388 },
 };
 
 export function loadCanvasFromDraft(

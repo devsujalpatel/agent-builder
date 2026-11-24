@@ -40,6 +40,9 @@ import { ToolPicker } from './tool-picker';
 
 type WorkspacePanel = 'tools' | 'settings' | 'chat' | null;
 
+const workspaceOverlay =
+  'bg-black/25 supports-backdrop-filter:backdrop-blur-none motion-reduce:transition-none';
+
 export function AgentBuilder({ agent }: { agent: Agent }) {
   return (
     <CanvasProvider
@@ -101,7 +104,7 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
     if (node && !node.data.modelId.trim()) {
       selectNode(node.id);
       setPanel('settings');
-      toast.add({ title: 'Enter a model ID before saving', type: 'error' });
+      toast.error('Enter a model ID before saving');
       return;
     }
 
@@ -115,13 +118,11 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
       {
         onSuccess: () => {
           markClean(revision);
-          toast.add({ title: 'Agent saved', type: 'success' });
+          toast.success('Agent saved');
         },
         onError: () => {
-          toast.add({
-            title: 'Couldn’t save the agent',
+          toast.error('Couldn’t save the agent', {
             description: 'Your changes are still here. Try saving again.',
-            type: 'error',
           });
         },
       },
@@ -129,13 +130,13 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-[92rem] flex-1 flex-col gap-5 px-4 py-6 sm:px-7 lg:px-9 lg:py-8">
-      <header className="space-y-4">
+    <div className="mx-auto flex w-full max-w-[92rem] flex-1 flex-col gap-5 px-4 py-6 sm:px-8 lg:px-10 lg:py-9">
+      <header className="workspace-surface space-y-4 rounded-3xl px-4 py-4 sm:px-5">
         <Button
           variant="ghost"
           size="sm"
           nativeButton={false}
-          className="text-muted-foreground -ml-2 motion-reduce:transition-none"
+          className="text-muted-foreground -ml-2 rounded-full motion-reduce:transition-none"
           render={
             <Link
               href="/agents"
@@ -162,7 +163,7 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
             {agent.icon && agent.icon !== '🤖' ? (
               <span
                 aria-hidden="true"
-                className="bg-muted grid size-11 shrink-0 place-items-center rounded-xl text-xl"
+                className="bg-muted grid size-11 shrink-0 place-items-center rounded-2xl text-xl"
               >
                 {agent.icon}
               </span>
@@ -170,7 +171,7 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
               <AppIcon name="bot" badge className="size-11" />
             )}
             <div className="min-w-0">
-              <h1 className="truncate text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h1 className="truncate text-2xl font-semibold tracking-[-0.045em] sm:text-3xl">
                 {displayName}
               </h1>
               <p
@@ -180,7 +181,7 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
                 {hasUnsavedChanges && (
                   <span
                     aria-hidden="true"
-                    className="size-1.5 rounded-full bg-amber-600 dark:bg-amber-400"
+                    className="bg-workspace-accent size-1.5 rounded-full"
                   />
                 )}
                 {saveAgent.isPending
@@ -192,12 +193,12 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-1.5">
+          <div className="bg-muted/75 flex max-w-full flex-wrap items-center gap-1.5 rounded-3xl p-1 sm:rounded-full">
             <Button
               variant="outline"
               size="sm"
               onClick={() => setPanel('tools')}
-              className="motion-reduce:transition-none"
+              className="rounded-full px-3 motion-reduce:transition-none"
             >
               <HugeiconsIcon
                 icon={Add01Icon}
@@ -210,7 +211,7 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
               variant="ghost"
               size="sm"
               onClick={openSettings}
-              className="motion-reduce:transition-none"
+              className="rounded-full px-3 motion-reduce:transition-none"
             >
               <HugeiconsIcon
                 icon={Settings02Icon}
@@ -224,7 +225,7 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
               variant="ghost"
               size="sm"
               onClick={() => setPanel('chat')}
-              className="motion-reduce:transition-none"
+              className="rounded-full px-3 motion-reduce:transition-none"
             >
               <HugeiconsIcon
                 icon={Message01Icon}
@@ -235,11 +236,11 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
               Test chat
             </Button>
             <Button
-              variant="primary"
+              variant="neutral"
               size="sm"
               onClick={handleSave}
               disabled={saveAgent.isPending || !hasUnsavedChanges}
-              className="motion-reduce:transition-none"
+              className="w-20 rounded-full px-3 motion-reduce:transition-none"
             >
               {saveAgent.isPending && (
                 <Spinner
@@ -256,14 +257,14 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
 
       <section
         aria-labelledby="workflow-heading"
-        className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border shadow-xs"
+        className="workspace-surface flex min-h-0 flex-1 flex-col overflow-hidden rounded-3xl"
       >
-        <div className="space-y-1 border-b border-dashed px-4 py-3 sm:px-5">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b px-4 py-3 sm:px-5">
           <h2 id="workflow-heading" className="text-sm font-semibold">
             Workflow
           </h2>
           <p className="text-muted-foreground text-xs">
-            Select a node and open Settings to inspect it.
+            Double-click a node to edit it.
           </p>
         </div>
         <div className="relative min-h-[28rem] flex-1 lg:min-h-[36rem]">
@@ -279,10 +280,10 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
         }}
       >
         <SheetContent
-          side="left"
-          className="gap-0 data-[side=left]:w-[min(100%,26rem)] motion-reduce:transition-none sm:data-[side=left]:max-w-104"
+          className="gap-0 data-[side=right]:w-full motion-reduce:transition-none sm:rounded-l-3xl sm:data-[side=right]:max-w-104"
+          overlayClassName={workspaceOverlay}
         >
-          <SheetHeader className="border-b border-dashed px-5 py-4 pr-12">
+          <SheetHeader className="border-b px-5 py-4 pr-12">
             <SheetTitle>Add capabilities</SheetTitle>
             <SheetDescription>
               Choose tools and memory for the agent.
@@ -301,8 +302,11 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
             setPanel((current) => (current === 'settings' ? null : current));
         }}
       >
-        <SheetContent className="gap-0 data-[side=right]:w-[min(100%,28rem)] motion-reduce:transition-none sm:data-[side=right]:max-w-112">
-          <SheetHeader className="border-b border-dashed px-5 py-4 pr-12">
+        <SheetContent
+          className="gap-0 data-[side=right]:w-full motion-reduce:transition-none sm:rounded-l-3xl sm:data-[side=right]:max-w-112"
+          overlayClassName={workspaceOverlay}
+        >
+          <SheetHeader className="border-b px-5 py-4 pr-12">
             <SheetTitle>Agent settings</SheetTitle>
             <SheetDescription>
               Edit the agent’s details or configure a node.
@@ -345,12 +349,18 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
           if (!open) setPanel(null);
         }}
       >
-        <SheetContent className="gap-0 data-[side=right]:w-[min(100%,28rem)] motion-reduce:transition-none sm:data-[side=right]:max-w-112">
-          <SheetHeader className="border-b border-dashed px-5 py-4 pr-12">
-            <SheetTitle>Test chat</SheetTitle>
-            <SheetDescription>
-              Try your agent with the current canvas.
-            </SheetDescription>
+        <SheetContent
+          className="bg-background gap-0 data-[side=right]:w-full motion-reduce:transition-none sm:rounded-l-3xl sm:data-[side=right]:max-w-xl [&>[data-slot=sheet-close]]:top-5"
+          overlayClassName={workspaceOverlay}
+        >
+          <SheetHeader className="flex-row items-center gap-3 border-b px-4 py-4 pr-14 sm:px-6 sm:pr-14">
+            <AppIcon name="bot" badge />
+            <div className="min-w-0">
+              <SheetTitle className="font-semibold">Test chat</SheetTitle>
+              <SheetDescription className="truncate text-xs">
+                {displayName}
+              </SheetDescription>
+            </div>
           </SheetHeader>
           <ChatPanel
             agentId={agent.id}

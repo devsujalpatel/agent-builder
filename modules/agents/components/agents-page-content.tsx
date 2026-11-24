@@ -28,14 +28,14 @@ export function AgentsPageContent() {
   const hasAgents = Boolean(agents?.length);
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-7 md:py-10 lg:px-10">
-      <header className="mb-7 flex flex-wrap items-end justify-between gap-4">
+    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-8 md:py-12 lg:px-12">
+      <header className="mb-7 flex flex-wrap items-end justify-between gap-4 border-b pb-6">
         <div className="space-y-2">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="text-[2rem] leading-tight font-semibold tracking-[-0.045em] sm:text-[2.75rem]">
             My agents
           </h1>
           <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
-            Open an agent to edit its details and instructions.
+            Manage your agents and open their workflows.
           </p>
         </div>
         {(hasAgents || isPending || isError) && <CreateAgentLink />}
@@ -81,7 +81,7 @@ export function AgentsPageContent() {
       )}
 
       {hasAgents && (
-        <ul className="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-[repeat(auto-fit,minmax(min(100%,15rem),1fr))] xl:grid-cols-3">
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,17rem),1fr))] gap-4">
           {agents?.map((agent) => (
             <li key={agent.id} className="min-w-0">
               <AgentCard agent={agent} />
@@ -91,11 +91,11 @@ export function AgentsPageContent() {
       )}
 
       {!hasAgents && !isError && !isPending && (
-        <Empty className="bg-sidebar/60 min-h-80 rounded-2xl border px-5 py-12">
+        <Empty className="workspace-surface min-h-80 rounded-3xl px-5 py-12">
           <EmptyHeader>
             <EmptyMedia
               variant="icon"
-              className="size-13 rounded-2xl border border-blue-200/80 bg-blue-50 text-blue-800 shadow-xs dark:border-blue-400/20 dark:bg-blue-400/10 dark:text-blue-200"
+              className="bg-muted text-workspace-accent-ink size-13 rounded-2xl"
             >
               <HugeiconsIcon
                 icon={BotIcon}
@@ -124,9 +124,9 @@ function CreateAgentLink() {
     <Button
       render={<Link href="/agents/new" />}
       nativeButton={false}
-      variant="primary"
+      variant="neutral"
       size="lg"
-      className="motion-reduce:transition-none"
+      className="rounded-full px-4 motion-reduce:transition-none"
     >
       <HugeiconsIcon
         icon={Add01Icon}

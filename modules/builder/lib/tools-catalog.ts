@@ -1,7 +1,3 @@
-import type { IconName } from '@/lib/icon-map';
-
-import { isCustomToolConfig } from './custom-tool';
-
 export const toolsCatalog = [
   { id: 'calculator', label: 'Calculator', icon: 'calculator' },
   { id: 'weather', label: 'Weather', icon: 'weather' },
@@ -19,14 +15,16 @@ export const toolsCatalog = [
   },
   { id: 'github_get_pr', label: 'GitHub Get PR', icon: 'github_get_pr' },
   { id: 'github_get_diff', label: 'GitHub Get Diff', icon: 'github_get_diff' },
-] satisfies { id: string; label: string; icon: IconName }[];
+];
 
 export function getToolLabel(toolId: string, config?: unknown) {
-  if (isCustomToolConfig(config)) return config.name || 'Custom tool';
-  return toolsCatalog.find((tool) => tool.id === toolId)?.label ?? toolId;
+  if ((config as { type?: string; name?: string })?.type === 'custom') {
+    return (config as { name: string }).name;
+  }
+  return toolsCatalog.find((t) => t.id === toolId)?.label ?? toolId;
 }
 
-export function getToolIcon(toolId: string, config?: unknown): IconName {
-  if (isCustomToolConfig(config)) return 'custom';
-  return toolsCatalog.find((tool) => tool.id === toolId)?.icon ?? 'bot';
+export function getToolIcon(toolId: string, config?: unknown) {
+  if ((config as { type?: string })?.type === 'custom') return 'custom';
+  return toolsCatalog.find((t) => t.id === toolId)?.icon ?? 'bot';
 }

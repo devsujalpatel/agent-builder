@@ -1,8 +1,8 @@
 /* All rules belong to the auth preview stage. */
 .ap {
   & .ss-stage {
-    --ss-accent: oklch(0.546 0.245 262.881);
-    --ss-accent-soft: oklch(0.546 0.245 262.881 / 0.12);
+    --ss-accent: var(--workspace-accent-ink);
+    --ss-accent-soft: color-mix(in oklab, var(--workspace-accent) 12%, transparent);
     --ss-font: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     --ss-radius-md: 7px;
     --ss-radius-lg: 10px;

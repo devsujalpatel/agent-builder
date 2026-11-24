@@ -81,23 +81,25 @@ export function AgentCanvas({ onConfigure }: { onConfigure: () => void }) {
         }}
         onSelectionChange={onSelectionChange}
         onPaneClick={() => selectNode(null)}
-        isValidConnection={({ source, target }) =>
-          source !== target &&
-          !edges.some(
-            (edge) => edge.source === target && edge.target === source,
-          )
-        }
+        isValidConnection={({ source, target }) => {
+          const sourceType = nodes.find((node) => node.id === source)?.type;
+          const targetType = nodes.find((node) => node.id === target)?.type;
+          return (
+            (sourceType === 'start' && targetType === 'agent') ||
+            (sourceType === 'agent' && targetType === 'end')
+          );
+        }}
         aria-label="Agent workflow canvas"
         fitView
         fitViewOptions={fitViewOptions}
-        className="[--xy-background-color:var(--sidebar)] [--xy-background-pattern-dots-color:var(--border)] [--xy-controls-button-background-color-hover:var(--muted)] [--xy-controls-button-background-color:var(--card)] [--xy-controls-button-border-color:var(--border)] [--xy-controls-button-color:var(--foreground)] [--xy-edge-stroke-width:1.25] [--xy-edge-stroke:var(--muted-foreground)] [--xy-handle-background-color:var(--muted-foreground)]"
+        className="[--xy-background-color:var(--muted)] [--xy-background-pattern-dots-color:var(--border)] [--xy-controls-button-background-color-hover:var(--muted)] [--xy-controls-button-background-color:var(--card)] [--xy-controls-button-border-color:var(--border)] [--xy-controls-button-color:var(--foreground)] [--xy-edge-stroke-width:1.25] [--xy-edge-stroke:var(--muted-foreground)] [--xy-handle-background-color:var(--muted-foreground)]"
       >
         <Background gap={18} size={1.5} />
         <Controls
           showInteractive={false}
-          className="m-3! overflow-hidden rounded-lg border shadow-sm [&_button:focus-visible]:outline-2 [&_button:focus-visible]:-outline-offset-2"
+          className="m-3! overflow-hidden rounded-xl border shadow-sm [&_button:focus-visible]:outline-2 [&_button:focus-visible]:-outline-offset-2"
         />
-        <MiniMap className="m-3! hidden overflow-hidden rounded-lg border shadow-sm lg:block" />
+        <MiniMap className="m-3! hidden overflow-hidden rounded-xl border shadow-sm lg:block" />
       </ReactFlow>
     </div>
   );
