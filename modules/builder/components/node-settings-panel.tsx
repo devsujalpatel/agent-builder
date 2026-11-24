@@ -17,13 +17,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 
 import { isCustomToolConfig } from '../lib/custom-tool';
-import { popularGptModels, popularInceptionModels } from '../lib/models';
+import { popularInceptionModels } from '../lib/models';
 import { getToolIcon, getToolLabel } from '../lib/tools-catalog';
 import { useCanvasStore } from '../store/canvas-store';
 import { CustomToolSettings } from './custom-tool-settings';
 import { GithubSettings } from './github-settings';
-
-const modelPresets = [...popularInceptionModels, ...popularGptModels];
 
 export function NodeSettingsPanel() {
   const selectedNode = useCanvasStore((state) =>
@@ -129,7 +127,7 @@ export function NodeSettingsPanel() {
             role="group"
             aria-label="Model presets"
           >
-            {modelPresets.map((model) => (
+            {popularInceptionModels.map((model) => (
               <Button
                 key={model}
                 variant="secondary"
