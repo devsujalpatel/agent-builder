@@ -23,6 +23,7 @@ import { StartNode } from './nodes/start-node';
 const defaultEdgeOptions = {
   markerEnd: { type: MarkerType.ArrowClosed },
 };
+const proOptions = { hideAttribution: true };
 const fitViewOptions = { padding: 0.16, maxZoom: 1 };
 
 const nodeTypes: NodeTypes = {
@@ -68,14 +69,14 @@ export function AgentCanvas({ onConfigure }: { onConfigure: () => void }) {
         edges={edges}
         nodeTypes={nodeTypes}
         defaultEdgeOptions={defaultEdgeOptions}
+        proOptions={proOptions}
         onInit={(instance) => {
           flowRef.current = instance;
         }}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        onNodeClick={(_, node) => selectNode(node.id)}
-        onNodeDoubleClick={(_, node) => {
+        onNodeClick={(_, node) => {
           selectNode(node.id);
           onConfigure();
         }}

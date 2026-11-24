@@ -120,11 +120,15 @@ export async function POST(
           },
         );
 
+        if (!assistantText.trim()) {
+          throw new Error('The agent returned an empty reply.');
+        }
+
         await prisma.message.create({
           data: {
             conversationId: conversationIdToUse,
             role: 'assistant',
-            content: assistantText || 'No response',
+            content: assistantText,
             toolEvents: toolEvents as Prisma.InputJsonValue,
           },
         });

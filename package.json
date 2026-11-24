@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:push": "prisma push",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev"
+    "postinstall": "bun run db:generate",
+    "db:push": "bunx --bun prisma db push",
+    "db:generate": "bunx --bun prisma generate",
+    "db:migrate": "bunx --bun prisma migrate dev",
+    "db:studio": "bunx --bun prisma studio"
   },
   "dependencies": {
     "@ai-sdk/langchain": "^3.0.181",

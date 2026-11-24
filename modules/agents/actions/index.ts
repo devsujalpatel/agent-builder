@@ -5,8 +5,8 @@ import {
   saveAgentInputSchema,
   type SaveAgentInput,
 } from '@/modules/builder/lib/schema';
-import { loadBuilderDefinition } from '@/modules/workflows/lib/migrate-v1';
-import { defaultDefinition } from '../lib/definition';
+import { migrateV1ToV2 } from '@/modules/workflows/lib/migrate-v1';
+import { defaultBuilderDefinition } from '@/modules/workflows/lib/schema';
 import { getTemplate } from '../lib/templates';
 
 export async function listAgents() {
@@ -37,7 +37,7 @@ export async function createBlankAgent() {
     data: {
       userId: user.user.id,
       name: 'Untitled Agent',
-      draftDefinition: defaultDefinition(),
+      draftDefinition: defaultBuilderDefinition(),
     },
   });
 }
@@ -59,7 +59,7 @@ export async function createFromTemplate(templateId: string) {
       icon: template.icon,
       welcomeMessage: template.welcomeMessage,
       starterPrompts: template.starterPrompts,
-      draftDefinition: template.definition,
+      draftDefinition: migrateV1ToV2(template.definition),
     },
   });
 }
@@ -69,46 +69,6 @@ export async function deleteAgent(agentId: string) {
 
   await prisma.agent.deleteMany({
     where: { id: agentId, userId: user.user.id },
-  });
-}
-
-export async function updateAgent(
-  agentId: string,
-  data: {
-    name?: string;
-    description?: string;
-    instructions?: string;
-  },
-) {
-  const user = await requireAuth();
-  const agent = await prisma.agent.findFirst({
-    where: { id: agentId, userId: user.user.id },
-  });
-
-  if (!agent) {
-    throw new Error('Agent not found');
-  }
-  const draftDefinition =
-    data.instructions === undefined
-      ? undefined
-      : loadBuilderDefinition(agent.draftDefinition);
-
-  if (draftDefinition && data.instructions !== undefined) {
-    const instructions = data.instructions;
-    draftDefinition.nodes = draftDefinition.nodes.map((node) =>
-      node.type === 'agent'
-        ? { ...node, config: { ...node.config, instructions } }
-        : node,
-    );
-  }
-
-  return prisma.agent.update({
-    where: { id: agentId, userId: user.user.id },
-    data: {
-      name: data.name,
-      description: data.description,
-      draftDefinition,
-    },
   });
 }
 

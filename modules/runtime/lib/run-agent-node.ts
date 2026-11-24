@@ -1,4 +1,4 @@
-import { ChatOpenAI } from "@langchain/openai";
+import { ChatOpenAICompletions } from "@langchain/openai";
 import {
   AIMessage,
   AIMessageChunk,
@@ -28,14 +28,14 @@ export async function runAgentNode({
   maxToolCalls,
   onEvent,
 }: RunAgentNodeOptions) {
-  const apiKey = process.env.INCEPTION_API_KEY;
+  const apiKey = process.env.INCEPTION_API_KEY?.trim();
 
   if (!apiKey) {
-    throw new Error("Add INCEPTION_API_KEY to .env");
+    throw new Error("Inception AI is missing its API key. Set INCEPTION_API_KEY in .env.");
   }
 
   const tools = await getToolsForAgent(config, userId);
-  const model = new ChatOpenAI({
+  const model = new ChatOpenAICompletions({
     // Run saved OpenAI presets and model IDs with the default Mercury model.
     model: /^(?:gpt-|chatgpt-|o[1-9](?:-|$))/.test(config.modelId)
       ? "mercury-3"
@@ -76,13 +76,20 @@ export async function runAgentNode({
     // Each chunk is a small piece; we join them into one full message.
     let response: AIMessageChunk | undefined;
 
-    for await (const chunk of await responseStream) {
-      response = response ? response.concat(chunk) : chunk;
+    try {
+      for await (const chunk of await responseStream) {
+        response = response ? response.concat(chunk) : chunk;
 
-      if (chunk.text) {
-        finalText += chunk.text;
-        onEvent({ type: "text_delta", text: chunk.text });
+        if (chunk.text) {
+          finalText += chunk.text;
+          onEvent({ type: "text_delta", text: chunk.text });
+        }
       }
+    } catch (error) {
+      if (error instanceof Error && "status" in error && error.status === 401) {
+        throw new Error("Inception AI rejected the API key. Check INCEPTION_API_KEY in .env.");
+      }
+      throw error;
     }
 
     if (!response) {

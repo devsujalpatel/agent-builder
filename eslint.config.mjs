@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Vendored stageshow kit (MIT, Benji Taylor); linted upstream.
     "components/stageshow/**",
+    ".agents/skills/stageshow/**",
   ]),
 ]);
 

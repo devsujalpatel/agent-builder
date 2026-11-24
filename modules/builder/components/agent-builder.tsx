@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import {
   Add01Icon,
@@ -28,6 +28,7 @@ import type { Agent } from '@/lib/generated/prisma/client';
 import { useSaveAgent } from '@/modules/agents/hooks/use-agents';
 import { ChatPanel } from '@/modules/playground/components/chat-panel';
 
+import { useUnsavedNavigation } from '../hooks/use-unsaved-navigation';
 import { canvasToBuilderDefinition, serializeCanvas } from '../lib/serialize';
 import {
   CanvasProvider,
@@ -78,16 +79,7 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
       )
     : [];
 
-  useEffect(() => {
-    if (!hasUnsavedChanges) return;
-
-    function onBeforeUnload(event: BeforeUnloadEvent) {
-      event.preventDefault();
-    }
-
-    window.addEventListener('beforeunload', onBeforeUnload);
-    return () => window.removeEventListener('beforeunload', onBeforeUnload);
-  }, [hasUnsavedChanges]);
+  useUnsavedNavigation(hasUnsavedChanges);
 
   function openSettings() {
     const { nodes, selectedNodeId, selectNode } = canvasStore.getState();
@@ -137,19 +129,7 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
           size="sm"
           nativeButton={false}
           className="text-muted-foreground -ml-2 rounded-full motion-reduce:transition-none"
-          render={
-            <Link
-              href="/agents"
-              onNavigate={(event) => {
-                if (
-                  hasUnsavedChanges &&
-                  !window.confirm('You have unsaved changes. Leave anyway?')
-                ) {
-                  event.preventDefault();
-                }
-              }}
-            />
-          }
+          render={<Link href="/agents" />}
         >
           <HugeiconsIcon
             icon={ArrowLeft01Icon}
@@ -264,7 +244,7 @@ function BuilderWorkspace({ agent }: { agent: Agent }) {
             Workflow
           </h2>
           <p className="text-muted-foreground text-xs">
-            Double-click a node to edit it.
+            Click a node to edit it.
           </p>
         </div>
         <div className="relative min-h-[28rem] flex-1 lg:min-h-[36rem]">

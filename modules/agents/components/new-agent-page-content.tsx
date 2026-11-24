@@ -1,14 +1,8 @@
 'use client';
 
-import {
-  Add01Icon,
-  AlertCircleIcon,
-  BotIcon,
-  File01Icon,
-} from '@hugeicons/core-free-icons';
+import { Add01Icon, BotIcon, File01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
-import { Alert, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Spinner } from '@/components/ui/spinner';
@@ -38,13 +32,6 @@ export function NewAgentPageContent() {
           Start with your own instructions or pick a template for the job.
         </p>
       </header>
-
-      {(createBlank.isError || createTemplate.isError) && (
-        <Alert variant="destructive" className="mb-4">
-          <HugeiconsIcon icon={AlertCircleIcon} aria-hidden="true" />
-          <AlertTitle>Couldn’t create the agent. Try again.</AlertTitle>
-        </Alert>
-      )}
 
       <Card className="workspace-surface grid gap-0 overflow-hidden rounded-3xl py-0 ring-0 sm:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
         <div className="flex flex-col items-start p-5 sm:p-7">

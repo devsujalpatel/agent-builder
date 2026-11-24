@@ -274,19 +274,22 @@ const ProximitySidebar = ({
   useEffect(() => () => clearPendingReset(), [clearPendingReset])
 
   useEffect(() => {
-    const kinds = sections.reduce<Record<string, SectionKind>>(
-      (nextKinds, section) => {
-        nextKinds[section.id] =
-          section.kind || section.level
-            ? getSectionKind(section)
-            : getElementSectionKind(section.id) ?? getSectionKind(section)
+    const frame = requestAnimationFrame(() => {
+      const kinds = sections.reduce<Record<string, SectionKind>>(
+        (nextKinds, section) => {
+          nextKinds[section.id] =
+            section.kind || section.level
+              ? getSectionKind(section)
+              : getElementSectionKind(section.id) ?? getSectionKind(section)
 
-        return nextKinds
-      },
-      {}
-    )
+          return nextKinds
+        },
+        {}
+      )
 
-    setDetectedKinds(kinds)
+      setDetectedKinds(kinds)
+    })
+    return () => cancelAnimationFrame(frame)
   }, [sectionIds, sections])
 
   useEffect(() => {

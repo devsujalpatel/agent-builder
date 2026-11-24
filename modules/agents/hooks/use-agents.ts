@@ -2,6 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { toast } from '@/components/ui/toast';
 import {
   createBlankAgent,
   createFromTemplate,
@@ -9,7 +10,6 @@ import {
   fetchAgent,
   listAgents,
   saveAgent,
-  updateAgent,
 } from '@/modules/agents/actions';
 import type { SaveAgentInput } from '@/modules/builder/lib/schema';
 import { agentKeys } from '@/modules/agents/lib/query-keys';
@@ -38,6 +38,7 @@ export function useCreateBlankAgent() {
       queryClient.invalidateQueries({ queryKey: agentKeys.list() });
       router.push(`/agents/${agent.id}/builder`);
     },
+    onError: () => toast.error('Couldn’t create the agent. Try again.'),
   });
 }
 
@@ -51,6 +52,7 @@ export function useCreateFromTemplate() {
       queryClient.invalidateQueries({ queryKey: agentKeys.list() });
       router.push(`/agents/${agent.id}/builder`);
     },
+    onError: () => toast.error('Couldn’t create the agent. Try again.'),
   });
 }
 
@@ -63,22 +65,6 @@ export function useDeleteAgent() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: agentKeys.list() });
       router.push('/agents');
-    },
-  });
-}
-
-export function useUpdateAgent(agentId: string) {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (data: {
-      name?: string;
-      description?: string;
-      instructions?: string;
-    }) => updateAgent(agentId, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: agentKeys.detail(agentId) });
-      queryClient.invalidateQueries({ queryKey: agentKeys.list() });
     },
   });
 }

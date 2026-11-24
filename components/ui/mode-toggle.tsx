@@ -79,17 +79,15 @@ function ModeToggleIcon({ clipPathId }: { clipPathId: string }) {
   )
 }
 
+const subscribeToMount = () => () => {}
+
 function ModeToggle({
   className,
   ...props
 }: React.ComponentProps<"button">) {
   const { resolvedTheme, setTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
+  const mounted = React.useSyncExternalStore(subscribeToMount, () => true, () => false)
   const clipPathId = React.useId()
-
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
 
   return (
     <div className={cn("flex items-center", className)}>

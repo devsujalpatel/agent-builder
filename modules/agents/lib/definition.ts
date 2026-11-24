@@ -19,8 +19,8 @@ export type AgentDefinition = {
 export function defaultDefinition(): AgentDefinition {
   return {
     schemaVersion: 1,
-    instructions: "You are a helpful assistant.",
-    model: { provider: "openai", modelId: "gpt-4o-mini" },
+    instructions: 'You are a helpful assistant.',
+    model: { provider: 'inception', modelId: 'mercury-3' },
     tools: [],
     memory: { enabled: false },
     limits: { maxToolCalls: 5, timeoutMs: 60000 },
