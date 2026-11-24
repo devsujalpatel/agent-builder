@@ -1,6 +1,6 @@
 export const AUTH_ROUTES = {
   signIn: '/sign-in',
-  afterSignIn: '/',
+  afterSignIn: '/agents',
   afterSignOut: '/sign-in',
 } as const;
 
@@ -8,7 +8,7 @@ export const AUTH_ROUTES = {
 export const GUEST_ROUTES: readonly string[] = [AUTH_ROUTES.signIn];
 
 /** Open to everyone. Every route not listed here or above requires auth. */
-export const PUBLIC_ROUTES: readonly string[] = [];
+export const PUBLIC_ROUTES: readonly string[] = ['/'];
 
 /** Search param carrying where to go after signing in. */
 export const CALLBACK_PARAM = 'callbackURL';

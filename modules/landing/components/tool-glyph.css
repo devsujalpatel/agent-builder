@@ -1,0 +1,32 @@
+/* The builder's tinted icon tiles, one color per tool (lib/icon-map.ts). */
+.lp-glyph {
+  --tint: #64748b;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 28%;
+  background: color-mix(in oklab, var(--tint) 16%, transparent);
+  color: color-mix(in oklab, var(--tint) 62%, black);
+
+  &[data-tone='search'] { --tint: #eab308; }
+  &[data-tone='web'] { --tint: #3b82f6; }
+  &[data-tone='math'] { --tint: #f59e0b; }
+  &[data-tone='weather'] { --tint: #0ea5e9; }
+  &[data-tone='code'] { --tint: #10b981; }
+  &[data-tone='agent'] { --tint: #06b6d4; }
+  &[data-tone='start'] { --tint: #10b981; }
+  &[data-tone='end'] { --tint: #f43f5e; }
+  &[data-tone='api'] { --tint: #84cc16; }
+  &[data-tone='write'] { --tint: #f43f5e; }
+  &[data-tone='review'] { --tint: #d946ef; }
+
+  & svg {
+    display: block;
+  }
+}
+
+.dark .lp-glyph,
+.ss-stage[data-theme='dark'] .lp-glyph {
+  background: color-mix(in oklab, var(--tint) 20%, transparent);
+  color: color-mix(in oklab, var(--tint) 45%, white);
+}

@@ -1,0 +1,189 @@
+/* Page-level styles and motion for the landing page. Curves from the
+   animation guide: a strong ease-out for entrances, ease for color. */
+.lp-page {
+  --lp-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ---- Nav ---- */
+
+.lp-nav-link {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+  transition: color 150ms ease;
+}
+
+.lp-nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lp-nav-link:hover {
+    color: var(--foreground);
+  }
+}
+
+/* ---- Hero ---- */
+
+/* The builder's dot canvas, lit faintly around the headline */
+.lp-hero-backdrop {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 760px;
+  background-image: radial-gradient(circle at 1px 1px, color-mix(in oklab, var(--foreground) 14%, transparent) 1px, transparent 0);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 60% 55% at 50% 30%, #000 10%, transparent 75%);
+  pointer-events: none;
+}
+
+.lp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 12px 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: var(--workspace-shadow);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.lp-eyebrow__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--workspace-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--workspace-accent) 18%, transparent);
+}
+
+/* The arrow leans toward where the button goes, on hover only */
+.lp-arrow {
+  transition: transform 200ms var(--lp-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a:hover > .lp-arrow {
+    transform: translateX(2px);
+  }
+}
+
+/* Copy rises in once on load, in reading order (first visit, delight tier) */
+.lp-enter > * {
+  animation: lp-rise 700ms var(--lp-ease-out) both;
+  animation-delay: calc(80ms + var(--i, 0) * 70ms);
+}
+
+.lp-hero-figure {
+  animation: lp-rise-far 900ms var(--lp-ease-out) both;
+  animation-delay: 380ms;
+}
+
+@keyframes lp-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(4px);
+  }
+}
+
+@keyframes lp-rise-far {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* ---- Section type ---- */
+
+.lp-kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--workspace-accent-ink);
+}
+
+/* ---- Steps ---- */
+
+.lp-step {
+  padding: 22px 24px 26px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--card);
+  box-shadow: var(--workspace-shadow);
+}
+
+.lp-step__icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+/* ---- Closing call to action ---- */
+
+.lp-cta {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: var(--card);
+  box-shadow: var(--workspace-shadow);
+}
+
+.lp-cta__texture {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, color-mix(in oklab, var(--foreground) 13%, transparent) 1px, transparent 0);
+  background-size: 20px 20px;
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 110%, #000 0%, transparent 70%);
+}
+
+/* ---- Scroll reveal: once, as each block enters ---- */
+
+[data-reveal-root] [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 600ms ease,
+    transform 800ms var(--lp-ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal-root] [data-reveal][data-visible] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Reduced motion: the same timing, opacity only */
+@media (prefers-reduced-motion: reduce) {
+  .lp-enter > *,
+  .lp-hero-figure {
+    animation-name: lp-fade;
+  }
+
+  [data-reveal-root] [data-reveal] {
+    transform: none;
+  }
+
+  .lp-arrow {
+    transition: none;
+  }
+}
+
+@keyframes lp-fade {
+  from {
+    opacity: 0;
+  }
+}
